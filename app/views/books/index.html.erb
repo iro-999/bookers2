@@ -1,14 +1,21 @@
-<h1>User info</h1>
-  <%= image_tag current_user.get_profile_image(100,100) %>
-  <%= image_tag 'no_image.jpg' %>
+<%= render 'error', book: @book %>
 
-<%= render 'list', books: @books %>
+<h1>User info</h1>
+<% if @book.image.attached? %>
+  <%= image_tag current_user.get_profile_image(100,100) %>
+<% else %>
+  <%= image_tag 'no_image.jpg' %>
+<% end %>
+
+<%= render 'list', book: @book %>
 
 <h1>Books</h1>
 
 <% @books.each do |book| %>
-  <%= link_to book.title, books_path(params[:id]) %>
-<% end %>
+  <%= link_to book.title, book_path(book.id) %>
 
+
+<%= @book.body %>
+<% end %>
 
 

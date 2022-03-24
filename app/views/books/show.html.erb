@@ -1,15 +1,17 @@
 <h1>User info</h1>
-<% @books.each do |book| %>
-  <%= image_tag book.get_image %>
-  <%= image_tag 'sample-author1.jpg' %>
+<% if @book.image.attached? %>
+  <%= image_tag current_user.get_profile_image(100,100) %>
+<% else %>
+  <%= image_tag 'no_image.jpg' %>
 <% end %>
 
-<%= render 'list', books: @books %>
+<%= render 'list', book: @book %>
 
-<h1>Books</h1>
+<h1>Book detail</h1>
+<%= link_to @books.title, books_path(@books.id) %>
+<%= @books.body %>
 
-<%= link_to "book.title", books_path(params[:id]) %>
-
-<% if @book.user == current_user %>
-  <%= link_to "Destroy", book_path(@book), method: :delete %>
+<% if @books.user == current_user %>
+  <%= link_to "Edit", edit_book_path(@books) %>
+  <%= link_to "Destroy", book_path(@books), method: :delete %>
 <% end %>
