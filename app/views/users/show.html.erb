@@ -1,18 +1,33 @@
-<h1>User info</h1>
+<% flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+
+<h2>User info</h2>
 <% if @book.image.attached? %>
   <%= image_tag current_user.get_profile_image(100,100) %>
 <% else %>
   <%= image_tag 'no_image.jpg' %>
 <% end %>
-  <h3>name<%= @user.name %></h3>
-  <h3>introduction<%= @user.introduction %></h3>
-  <% if @user == User.find(params[:id]) %>
-    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-  <% end %>
+<table>
+  <tbody>
+    <tr>
+      <th>name</th>
+      <th><%= @user.name %></th>
+    </tr>
+    <tr>
+      <th>introduction</th>
+      <th><%= @user.introduction %></th>
+    </tr>
+  </tbody>
+</table>
+<% if @user == current_user %>
+  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+<% end %>
 
 <%= render 'books/list', book: @book %>
 
-<h1>Book detail</h1>
+<h2>Book detail</h2>
 
 
 <% @books.each do |book| %>
@@ -23,6 +38,6 @@
   <% end %>
 
   <%= link_to book.title, book_path(book.id) %>
-  <%= @book.body %>
+  <%= book.body %>
   <%= @user.name %>
 <% end %>

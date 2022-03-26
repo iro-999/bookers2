@@ -12,7 +12,11 @@
 
   <body>
     <header>
+      <span>
+        <%= link_to "Bookers", root_path %>
+      </span>
     <% if user_signed_in? %>
+
       <li>
         <%= link_to "Home", user_path(current_user.id) %>
       </li>
@@ -35,6 +39,10 @@
       <li>
         <%= link_to "Log in", new_user_session_path %>
       </li>
+    <% end %>
+
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
   </header>
     <%= yield %>

@@ -1,17 +1,43 @@
-<h1>User info</h1>
+<% flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+
+<h2>User info</h2>
+<% if @book.image.attached? %>
+  <%= image_tag current_user.get_profile_image(100,100) %>
+<% else %>
+  <%= image_tag 'no_image.jpg' %>
+<% end %>
+<table>
+  <tbody>
+    <tr>
+      <th>name</th>
+      <th><%= @user.name %></th>
+    </tr>
+    <tr>
+      <th>introduction</th>
+      <th><%= @user.introduction %></th>
+    </tr>
+  </tbody>
+</table>
+
+<%= render 'list', book: @book %>
+
+<h2>Book detail</h2>
+
 <% if @book.image.attached? %>
   <%= image_tag current_user.get_profile_image(100,100) %>
 <% else %>
   <%= image_tag 'no_image.jpg' %>
 <% end %>
 
-<%= render 'list', book: @book %>
+<%= link_to @user.name, user_path %>
 
-<h1>Book detail</h1>
 <%= link_to @books.title, books_path(@books.id) %>
 <%= @books.body %>
 
 <% if @books.user == current_user %>
   <%= link_to "Edit", edit_book_path(@books) %>
-  <%= link_to "Destroy", book_path(@books), method: :delete %>
+  <%= link_to "Destroy", book_path(@books), method: :delete, "data-confirm" => "本当に消しますか？" %>
 <% end %>

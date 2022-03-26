@@ -4,11 +4,43 @@
 <% else %>
   <%= image_tag 'no_image.jpg' %>
 <% end %>
-<p>name<%= @user.name %></p>
-<p>introduction<%= @user.introduction %></p>
+
+<table>
+  <tbody>
+    <tr>
+      <th>name</th>
+      <th><%= @user.name %></th>
+    </tr>
+    <tr>
+      <th>introduction</th>
+      <th><%= @user.introduction %></th>
+    </tr>
+  </tbody>
+</table>
 <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
 
 
-<%= @users.name %>
-
-<%= link_to "Show",user_path(@user.id) %>
+<h2>Users</h2>
+<table>
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td>
+        <% if @book.image.attached? %>
+          <%= image_tag current_user.get_profile_image(100,100) %>
+        <% else %>
+          <%= image_tag 'no_image.jpg' %>
+        <% end %>
+      </td>
+      <td><%= user.name %></td>
+      <td><%= link_to "Show",user_path(user.id) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
