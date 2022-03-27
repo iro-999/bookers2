@@ -1,19 +1,35 @@
-<h1>User info</h1>
+<main>
+  <p id="notice"></p>
+  <div class="container">
+    <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2>User info</h2>
 
 <%= render 'books/error', book: @user %>
 
-<%= form_with model: @user do |f| %>
-  <label for="inputName">Name</label>
-  <br>
-  <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%>
-  <br>
-  <label for="inputImage">ProfileImage</label>
-  <br>
-  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
-  <br>
-  Introduction
-  <br>
-  <%= f.text_area :introduction %>
-  <br>
-  <%= f.submit "Update User" %>
-<% end %>
+  <div class="form-group">
+    <%= form_with model: @user do |f| %>
+      <label for="inputName">Name</label>
+      <br>
+      <%= f.text_field :name, autofocus: true, id:"inputName"%>
+  </div>
+      <br>
+  <div class="form-group">
+      <label for="user_image">Image</label>
+      <br>
+      <%= f.file_field :profile_image, accept: "image/*" %>
+  </div>
+      <br>
+  <div class="form-group">
+      <label for="user_introduction">Introduction</label>
+      <br>
+      <%= f.text_area :introduction %>
+  </div>
+      <br>
+  <div class="form-group">
+      <%= f.submit "Update User", class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+</div>
+</div>
+</main>
