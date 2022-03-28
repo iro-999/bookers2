@@ -17,6 +17,11 @@
       </tr>
     </tbody>
   </table>
+  <div class="row">
+    <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+  </div>
 
 <%= render 'list', book: @book %>
 
@@ -26,9 +31,11 @@
         <tbody>
           <tr>
             <td>
-              <%= image_tag @user.get_profile_image(50,50), class: "attachment user profile_image fallback" %>
-              <br>
-              <%= link_to @user.name, user_path %>
+              <%= link_to user_path(@user) do %>
+                <%= image_tag @user.get_profile_image(50,50), class: "attachment user profile_image fallback" %>
+                <br>
+                <%= @user.name %>
+              <% end %>
             </td>
             <td><%= link_to @books.title, book_path(@books.id) %></td>
             <td><%= @books.body %></td>

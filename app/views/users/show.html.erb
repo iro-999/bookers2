@@ -17,13 +17,11 @@
       </tr>
     </tbody>
   </table>
-<% if @user == current_user %>
   <div class="row">
-    <%= link_to edit_user_path(@user) do %>
-      <i class="btn btn-outline-secondary btn-block fas fa-user-cog edit_user_67564"></i>
+    <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+      <i class="fas fa-user-cog"></i>
     <% end %>
   </div>
-<% end %>
 
 <%= render 'books/list', book: @book %>
 
@@ -44,3 +42,4 @@
   </tr>
 <% end %>
 </table>
+</main>
